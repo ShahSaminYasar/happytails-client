@@ -1,25 +1,54 @@
+"use client";
+
+import Loader from "@/components/Loader";
 import Image from "next/image";
-import { redirect } from "next/navigation";
-import { auth } from "@/lib/auth";
-import { headers } from "next/headers";
+import { redirect, useParams } from "next/navigation";
+import { useQuery } from "@tanstack/react-query";
+import { useSession } from "@/lib/authClient";
 
-const page = async ({ params }) => {
-  const { id } = await params;
+const PetDetailsPage = () => {
+  const { id } = useParams();
 
-  const petData = await fetch(
-    `${process.env.NEXT_PUBLIC_SERVER_URL}/pets/${id}`,
-    {
-      cache: "no-store",
+  const { data: session } = useSession();
+  const user = session?.user;
+
+  const {
+    data: petData,
+    isLoading,
+    isError,
+  } = useQuery({
+    queryKey: ["pet", id],
+    queryFn: async () => {
+      const result = await fetch(
+        `${process.env.NEXT_PUBLIC_SERVER_URL}/pets/${id}`,
+      );
+
+      if (!result.ok) {
+        throw new Error("Failed to fetch pet");
+      }
+
+      return result.json();
     },
-  ).then((res) => res.json());
-
-  if (!id || !petData) return redirect("/pets");
-
-  const session = await auth.api.getSession({
-    headers: await headers(),
+    enabled: !!id,
   });
 
-  const user = session?.user;
+  if (!id) return redirect("/pets");
+
+  if (isLoading) {
+    return (
+      <div className="flex justify-center items-center py-30">
+        <Loader />
+      </div>
+    );
+  }
+
+  if (isError || !petData) {
+    return (
+      <div className="py-30 text-center text-destructive">
+        Failed to load pet details.
+      </div>
+    );
+  }
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-10">
@@ -183,4 +212,4 @@ const page = async ({ params }) => {
   );
 };
 
-export default page;
+export default PetDetailsPage;

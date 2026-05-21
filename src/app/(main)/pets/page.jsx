@@ -1,5 +1,4 @@
 "use client";
-
 import Loader from "@/components/Loader";
 import PetCard from "@/components/PetCard";
 import { Button } from "@/components/ui/button";
