@@ -1,9 +1,10 @@
+import Header from "@/components/Header";
 import "./globals.css";
 import { Montserrat } from "next/font/google";
 
 const montserrat = Montserrat({
   variable: "--font-sans",
-  weight: ["100", "400", "600", "800"],
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800"],
 });
 
 export const metadata = {
@@ -17,7 +18,10 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className={`${montserrat.className} h-full antialiased`}>
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">
+        <Header />
+        {children}
+      </body>
     </html>
   );
 }
