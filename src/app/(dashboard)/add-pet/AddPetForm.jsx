@@ -1,5 +1,4 @@
 "use client";
-
 import { Button } from "@/components/ui/button";
 import { Field, FieldLabel } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
@@ -10,21 +9,60 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { useSession } from "@/lib/authClient";
+import { Textarea } from "@/components/ui/textarea";
+import { token, useSession } from "@/lib/authClient";
 import { PlusIcon } from "@phosphor-icons/react";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import toast from "react-hot-toast";
 
 const AddPetForm = () => {
   const { data: session } = useSession();
+  const router = useRouter();
+
+  // States
+  const [processing, setProcessing] = useState(false);
 
   const handleAddPet = async (e) => {
     e.preventDefault();
+
+    if (!session) return router.push("/login");
 
     const form = e.currentTarget;
     const formData = new FormData(form);
 
     formData.append("ownerEmail", session?.user?.email);
 
-    console.log(Object.fromEntries(formData.entries()));
+    try {
+      setProcessing(true);
+
+      const { data: tokenData } = await token();
+
+      const payload = Object.fromEntries(formData.entries());
+
+      const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/pet`, {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+          authorization: `Bearer ${tokenData?.token}`,
+        },
+        body: JSON.stringify(payload),
+      });
+
+      const data = await res.json();
+
+      if (res.ok && data.ok) {
+        toast.success(data.message || "Published successfully");
+        router.push(`/pets/${data?.id}`);
+      } else {
+        toast.error(data.message || "Failed to publish post.");
+      }
+    } catch (error) {
+      console.error(error);
+      toast.error(error?.message || "Something went wrong");
+    } finally {
+      setProcessing(false);
+    }
   };
 
   return (
@@ -137,10 +175,18 @@ const AddPetForm = () => {
 
       <Field>
         <FieldLabel htmlFor="description">Description (optional)</FieldLabel>
-        <Input name="description" placeholder="0.00" type="number" />
+        <Textarea
+          name="description"
+          placeholder="Tell more about the pet..."
+          rows={5}
+        />
       </Field>
 
-      <Button size="lg" className={"w-full"}>
+      <Button
+        size="lg"
+        className={"w-full disabled:grayscale"}
+        disabled={processing}
+      >
         <PlusIcon /> Add Pet
       </Button>
     </form>

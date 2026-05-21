@@ -15,9 +15,9 @@ const PetCard = ({ pet }) => {
   return (
     <div className="group relative bg-white rounded-sm overflow-hidden border border-border hover:shadow-sm transition-all duration-150 flex flex-col">
       {/* Image */}
-      <div className="relative h-52 overflow-hidden bg-border">
+      <div className="relative aspect-4/3 overflow-hidden bg-border">
         <Image
-          src={pet?.imageUrl}
+          src={pet?.photo}
           width={500}
           height={500}
           alt={pet?.name}

@@ -44,7 +44,7 @@ const tips = [
 
 const PetCareTips = () => {
   return (
-    <section className="py-20 px-3">
+    <section className="pb-20 pt-5 px-3">
       <div className="w-full max-w-7xl mx-auto flex flex-col gap-10">
         {/* Header */}
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4">

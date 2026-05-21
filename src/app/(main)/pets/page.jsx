@@ -32,7 +32,7 @@ const AllPetsPage = () => {
   });
 
   return (
-    <div className="w-full max-w-7xl mx-auto px-3 py-20 flex flex-col gap-10">
+    <div className="w-full max-w-7xl mx-auto px-3 py-10 flex flex-col gap-10">
       <h3 className="text-3xl sm:text-4xl md:text-5xl font-medium text-foreground text-center md:text-left">
         Browse <span className="font-semibold">All Pets</span>
       </h3>
