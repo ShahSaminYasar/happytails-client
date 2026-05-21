@@ -1,5 +1,6 @@
 import Featured from "./Featured";
 import Hero from "./Hero";
+import PetCareTips from "./PetCareTips";
 import WhyAdoptPets from "./WhyAdoptPets";
 
 export default function Home() {
@@ -8,6 +9,7 @@ export default function Home() {
       <Hero />
       <WhyAdoptPets />
       <Featured />
+      <PetCareTips />
     </>
   );
 }

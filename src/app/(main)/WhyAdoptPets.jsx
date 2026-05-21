@@ -28,7 +28,7 @@ const cards = [
 
 const WhyAdoptPets = () => {
   return (
-    <section className="bg-secondary/5 py-20 px-3">
+    <section className="bg-primary/5 py-20 px-3">
       <div className="w-full max-w-7xl mx-auto flex flex-col md:grid md:grid-cols-2 gap-6 md:gap-10 items-center">
         <Image
           src={"/cat.png"}
@@ -66,7 +66,7 @@ const WhyAdoptPets = () => {
           </div>
 
           <Button asChild className={"w-fit px-7"}>
-            <Link href="/all-pets">
+            <Link href="/pets">
               <PawPrintIcon size={20} /> Find your friend now
             </Link>
           </Button>

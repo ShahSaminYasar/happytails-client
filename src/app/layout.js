@@ -3,6 +3,7 @@ import "./globals.css";
 import { Montserrat } from "next/font/google";
 import Footer from "@/components/Footer";
 import { Toaster } from "react-hot-toast";
+import TanStackQueryProvider from "@/providers/TanStackQueryProvider";
 
 const montserrat = Montserrat({
   variable: "--font-sans",
@@ -23,7 +24,9 @@ export default function RootLayout({ children }) {
       <body className="min-h-full flex flex-col">
         <Toaster />
         <Header />
-        <main>{children}</main>
+        <TanStackQueryProvider>
+          <main>{children}</main>
+        </TanStackQueryProvider>
         <Footer />
       </body>
     </html>

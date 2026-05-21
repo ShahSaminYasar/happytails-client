@@ -3,9 +3,9 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
 const Featured = async () => {
-  const petsData = await fetch(`${process.env.SERVER_URL}/pets?limit=6`).then(
-    (res) => res.json(),
-  );
+  const petsData = await fetch(
+    `${process.env.NEXT_PUBLIC_SERVER_URL}/pets?limit=6`,
+  ).then((res) => res.json());
 
   return (
     <section className="w-full py-20 px-3 bg-background">
@@ -21,7 +21,7 @@ const Featured = async () => {
         </div>
 
         <Button asChild className={"px-8"}>
-          <Link href="/all-pets">View All</Link>
+          <Link href="/pets">View All</Link>
         </Button>
       </div>
     </section>

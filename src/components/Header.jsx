@@ -17,7 +17,7 @@ const navLinks = [
   },
   {
     label: "All Pets",
-    path: "/all-pets",
+    path: "/pets",
   },
   {
     label: "My Requests",
