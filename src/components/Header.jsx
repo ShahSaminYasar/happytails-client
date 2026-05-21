@@ -51,7 +51,7 @@ const Header = () => {
   return (
     <>
       <header className="p-3 bg-transparent fixed top-0 left-0 w-full z-40">
-        <div className="w-full max-w-7xl mx-auto h-20 px-5 md:px-7 py-3 flex items-center justify-between gap-5 rounded-full border border-border bg-linear-to-r from-white/5 via-white/20 to-white/5 backdrop-blur-xs">
+        <div className="w-full max-w-7xl mx-auto h-20 px-5 md:px-7 py-3 flex items-center justify-between gap-5 rounded-full border border-border bg-linear-to-r from-white/5 via-white/20 to-white/5 backdrop-blur-sm">
           {/* Logo */}
           <Link href={"/"}>
             <Image
@@ -98,10 +98,14 @@ const Header = () => {
         </div>
       </header>
 
-      <div
-        className="fixed top-0 left-0 w-full h-full bg-transparent z-30"
-        onClick={() => setMobileMenuOpen(false)}
-      ></div>
+      {mobileMenuOpen && (
+        <div
+          className="block md:hidden fixed top-0 left-0 w-full h-full bg-transparent z-30"
+          onClick={() => setMobileMenuOpen(false)}
+        ></div>
+      )}
+
+      <div className="mb-26"></div>
     </>
   );
 };
