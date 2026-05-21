@@ -37,7 +37,7 @@ const Navlink = ({ label, path, setMobileMenuOpen }) => {
         setMobileMenuOpen(false);
         router.push(path);
       }}
-      className={`text-base font-medium hover:no-underline ${isActive ? "text-primary" : "text-secondary"} hover:text-primary`}
+      className={`text-base font-medium hover:no-underline ${isActive ? "text-primary" : "text-secondary"} hover:text-primary px-0 text-base`}
     >
       {label}
     </Button>
@@ -56,8 +56,8 @@ const Header = () => {
           <Link href={"/"}>
             <Image
               src={"/logo.png"}
-              width={300}
-              height={120}
+              width={400}
+              height={150}
               alt="Happy Tails logo"
               priority
               className="w-50 md:w-60"
@@ -68,7 +68,7 @@ const Header = () => {
           <nav
             className={`absolute left-0 p-5 rounded-lg border border-border w-full bg-white transition-all duration-200 ${mobileMenuOpen ? "top-[calc(100%+10px)] pointer-events-auto opacity-100" : "top-[calc(100%+50px)] pointer-events-none opacity-0"} z-40 md:relative md:bg-transparent md:opacity-100 md:pointer-events-auto md:p-0 md:rounded-none md:border-none md:top-auto md:left-auto md:w-fit`}
           >
-            <ul className="flex flex-col md:flex-row items-center gap-6.5">
+            <ul className="flex flex-col md:flex-row items-center gap-5.5">
               {navLinks?.map((navlink, index) => (
                 <li key={`${navlink?.path}_${index}`}>
                   <Navlink

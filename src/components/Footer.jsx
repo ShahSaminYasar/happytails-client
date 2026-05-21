@@ -8,7 +8,7 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 
-const navLinks = [
+const pages = [
   {
     label: "Home",
     path: "/",
@@ -52,7 +52,7 @@ const Footer = () => {
         {/* Col-03 */}
         <div className="flex flex-col gap-1">
           <span className="font-semibold text-secondary">Pages</span>
-          {navLinks?.map((page, index) => (
+          {pages?.map((page, index) => (
             <Link
               className="text-sm font-normal"
               key={`${page?.path}_${index}`}
