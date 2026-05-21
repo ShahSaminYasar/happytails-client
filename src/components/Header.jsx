@@ -5,6 +5,10 @@ import { usePathname, useRouter } from "next/navigation";
 import { Button } from "./ui/button";
 import { useState } from "react";
 import { ListIcon } from "@phosphor-icons/react";
+import { signOut, useSession } from "@/lib/authClient";
+import { Spinner } from "./ui/spinner";
+import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
+import { Avatar, AvatarImage } from "./ui/avatar";
 
 const navLinks = [
   {
@@ -45,8 +49,16 @@ const Navlink = ({ label, path, setMobileMenuOpen }) => {
 };
 
 const Header = () => {
+  const { data: session, isPending } = useSession();
+  const router = useRouter();
+
   // States
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  const handleLogout = async () => {
+    await signOut();
+    router.push("/");
+  };
 
   return (
     <>
@@ -83,9 +95,40 @@ const Header = () => {
 
           {/* Buttons */}
           <div className="flex items-center gap-3">
-            <Button asChild>
-              <Link href={"/login"}>Login</Link>
-            </Button>
+            {isPending ? (
+              <Spinner />
+            ) : session?.user ? (
+              <Popover>
+                <PopoverTrigger asChild>
+                  <Avatar>
+                    <AvatarImage src={session?.user?.image || "/user.png"} />
+                  </Avatar>
+                </PopoverTrigger>
+
+                <PopoverContent align="end">
+                  <span>
+                    Logged in as{" "}
+                    <span className="font-semibold">{session?.user?.name}</span>
+                  </span>
+
+                  <Button variant="outline" className={"w-full"} asChild>
+                    <Link href="/my-requests">Dashboard</Link>
+                  </Button>
+
+                  <Button
+                    variant="destructive"
+                    onClick={handleLogout}
+                    className={"w-full"}
+                  >
+                    Logout
+                  </Button>
+                </PopoverContent>
+              </Popover>
+            ) : (
+              <Button asChild>
+                <Link href={"/login"}>Login</Link>
+              </Button>
+            )}
 
             <Button
               variant="outline"

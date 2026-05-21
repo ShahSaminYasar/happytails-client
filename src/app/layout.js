@@ -2,6 +2,7 @@ import Header from "@/components/Header";
 import "./globals.css";
 import { Montserrat } from "next/font/google";
 import Footer from "@/components/Footer";
+import { Toaster } from "react-hot-toast";
 
 const montserrat = Montserrat({
   variable: "--font-sans",
@@ -20,6 +21,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" className={`${montserrat.className} h-full antialiased`}>
       <body className="min-h-full flex flex-col">
+        <Toaster />
         <Header />
         <main>{children}</main>
         <Footer />
