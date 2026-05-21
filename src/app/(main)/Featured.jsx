@@ -8,7 +8,7 @@ const Featured = async () => {
   );
 
   return (
-    <section className="w-full py-20 px-3 bg-secondary/5">
+    <section className="w-full py-20 px-3 bg-background">
       <div className="max-w-7xl mx-auto flex items-center justify-center flex-col gap-8">
         <h3 className="text-3xl sm:text-4xl md:text-5xl font-medium text-foreground">
           <span className="font-semibold">Featured</span> Pets
