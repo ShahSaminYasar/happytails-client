@@ -143,7 +143,7 @@ const Header = () => {
 
       {mobileMenuOpen && (
         <div
-          className="block md:hidden fixed top-0 left-0 w-full h-full bg-transparent z-30"
+          className="block md:hidden fixed top-0 left-0 w-full h-full bg-white/30 backdrop-blur-xs z-30"
           onClick={() => setMobileMenuOpen(false)}
         ></div>
       )}
