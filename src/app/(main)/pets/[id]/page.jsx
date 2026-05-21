@@ -62,6 +62,7 @@ const PetDetailsPage = () => {
               alt={petData?.name}
               fill
               className="object-cover"
+              priority
             />
           </div>
 
