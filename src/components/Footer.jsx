@@ -43,14 +43,14 @@ const Footer = () => {
         {/* Col-04 */}
         <div className="flex flex-col gap-1">
           <span className="font-semibold text-secondary">About Us</span>
-          <p className="text-sm">
+          <p className="text-sm tracking-wide leading-5">
             Every pet deserves a loving home. Explore, connect, and take a step
             toward giving a shelter animal a forever family through adoption.
           </p>
         </div>
 
         {/* Col-03 */}
-        <div className="flex flex-col gap-1">
+        <div className="flex flex-col gap-2.5">
           <span className="font-semibold text-secondary">Pages</span>
           {pages?.map((page, index) => (
             <Link
@@ -64,7 +64,7 @@ const Footer = () => {
         </div>
 
         {/* Col-04 */}
-        <div className="flex flex-col gap-1">
+        <div className="flex flex-col gap-2.5">
           <span className="font-semibold text-secondary">Our Socials</span>
           <Link
             className="text-sm font-normal flex items-center gap-1"

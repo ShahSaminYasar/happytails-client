@@ -16,7 +16,7 @@ const ErrorMsg = ({ msg }) => {
   return <p className="block text-xs font-semibold text-destructive">{msg}</p>;
 };
 
-const LoginPage = () => {
+const RegisterPage = () => {
   const {
     register,
     handleSubmit,
@@ -38,7 +38,7 @@ const LoginPage = () => {
   const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
   const [processing, setProcessing] = useState(false);
 
-  const handleLogin = async (data) => {
+  const handleRegister = async (data) => {
     const { name, email, photoUrl, password } = data;
 
     try {
@@ -71,7 +71,7 @@ const LoginPage = () => {
   return (
     <div className="py-10 px-3">
       <form
-        onSubmit={handleSubmit(handleLogin)}
+        onSubmit={handleSubmit(handleRegister)}
         className="w-full max-w-sm mx-auto flex flex-col gap-3"
       >
         <h2 className="text-4xl font-semibold text-foreground block text-left tracking-tighter w-full leading-12 mb-3">
@@ -223,4 +223,4 @@ const LoginPage = () => {
   );
 };
 
-export default LoginPage;
+export default RegisterPage;
