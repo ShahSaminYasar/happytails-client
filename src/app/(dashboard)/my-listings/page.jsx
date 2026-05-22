@@ -3,6 +3,7 @@ import Loader from "@/components/Loader";
 import PetCard from "@/components/PetCard";
 import PetEditDialog from "@/components/PetEditDialog";
 import PetListingCard from "@/components/PetListingCard";
+import RequestsDialog from "@/components/RequestsDialog";
 import { token, useSession } from "@/lib/authClient";
 import { useQuery } from "@tanstack/react-query";
 import Link from "next/link";
@@ -15,6 +16,9 @@ const MyListingsPage = () => {
   // States
   const [editDialogOpen, setEditDialogOpen] = useState(false);
   const [editingPetData, setEditingPetData] = useState({});
+  const [requestsDialogOpen, setRequestsDialogOpen] = useState(false);
+  const [requestsOfPetId, setRequestsOfPetId] = useState("");
+  const [requestsOfPetName, setRequestsOfPetName] = useState("");
 
   const { data, isLoading, isError, error, refetch } = useQuery({
     queryKey: ["listings", session],
@@ -64,6 +68,12 @@ const MyListingsPage = () => {
     setEditDialogOpen(true);
   };
 
+  const handleViewAdoptionRequests = (petId, petName) => {
+    setRequestsOfPetId(petId);
+    setRequestsOfPetName(petName);
+    setRequestsDialogOpen(true);
+  };
+
   return (
     <>
       <section className="w-full flex flex-col gap-3">
@@ -96,6 +106,7 @@ const MyListingsPage = () => {
                 pet={pet}
                 handleDelete={handleDeletePet}
                 handleEdit={handleEdit}
+                handleViewRequests={handleViewAdoptionRequests}
               />
             ))}
           </div>
@@ -107,6 +118,13 @@ const MyListingsPage = () => {
         setOpen={setEditDialogOpen}
         petData={editingPetData}
         refetch={refetch}
+      />
+
+      <RequestsDialog
+        open={requestsDialogOpen}
+        setOpen={setRequestsDialogOpen}
+        petId={requestsOfPetId}
+        petName={requestsOfPetName}
       />
     </>
   );

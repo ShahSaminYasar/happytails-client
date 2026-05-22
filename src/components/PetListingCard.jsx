@@ -5,7 +5,12 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import Swal from "sweetalert2";
 
-const PetListingCard = ({ pet, handleDelete, handleEdit }) => {
+const PetListingCard = ({
+  pet,
+  handleDelete,
+  handleEdit,
+  handleViewRequests,
+}) => {
   const [imgSrc, setImgSrc] = useState(
     pet?.photo || "https://blocks.astratic.com/img/general-img-landscape.png",
   );
@@ -41,7 +46,10 @@ const PetListingCard = ({ pet, handleDelete, handleEdit }) => {
         <p className="text-xs text-gray-400">{pet.location}</p>
 
         <div className="grid grid-cols-2 gap-2 mt-4">
-          <button className="bg-blue-500 text-white text-sm py-1 rounded hover:bg-blue-600">
+          <button
+            onClick={() => handleViewRequests(pet?._id, pet?.name)}
+            className="bg-blue-500 text-white text-sm py-1 rounded hover:bg-blue-600"
+          >
             Requests
           </button>
 
