@@ -26,7 +26,7 @@ const PetCard = ({ pet }) => {
         <div className="absolute inset-0 bg-linear-to-t from-black/30 to-transparent" />
 
         {/* Species badge */}
-        <span className="absolute top-3 left-3 bg-white/90 backdrop-blur-sm text-stone-700 text-xs font-semibold px-3 py-1 rounded-full flex items-center gap-1.5">
+        <span className="absolute top-3 left-3 bg-white/90 backdrop-blur-sm text-stone-700 text-xs font-semibold px-3 py-1 rounded-full flex items-center gap-1.5 capitalize">
           <span>{speciesEmoji[pet?.species] ?? "🐾"}</span>
           {pet?.species}
         </span>
@@ -88,7 +88,7 @@ const Pill = ({ children, color = "stone" }) => {
   };
   return (
     <span
-      className={`text-xs font-medium px-2.5 py-0.5 rounded-full ${styles[color]}`}
+      className={`text-xs font-medium px-2.5 py-0.5 rounded-full capitalize ${styles[color]}`}
     >
       {children}
     </span>

@@ -6,6 +6,8 @@ import { useQuery } from "@tanstack/react-query";
 import { token, useSession } from "@/lib/authClient";
 import Swal from "sweetalert2";
 import toast from "react-hot-toast";
+import { useState } from "react";
+import { Spinner } from "@/components/ui/spinner";
 
 const PetDetailsPage = () => {
   const { id } = useParams();
@@ -13,6 +15,9 @@ const PetDetailsPage = () => {
 
   const { data: session } = useSession();
   const user = session?.user;
+
+  //   States
+  const [requestProcessing, setRequestProcessing] = useState(false);
 
   const {
     data: petData,
@@ -59,6 +64,8 @@ const PetDetailsPage = () => {
     if (!pickupDate) return toast.info("Pickup date is required");
 
     try {
+      setRequestProcessing(true);
+
       const { data: tokenData } = await token();
 
       const payload = {
@@ -92,6 +99,8 @@ const PetDetailsPage = () => {
     } catch (error) {
       console.error(error);
       toast.error(error?.message || "Something went wrong");
+    } finally {
+      setRequestProcessing(false);
     }
   };
 
@@ -271,10 +280,16 @@ const PetDetailsPage = () => {
             {/* Submit */}
             <button
               type="submit"
-              disabled={petData?.ownerEmail === user?.email}
+              disabled={
+                petData?.ownerEmail === user?.email || requestProcessing
+              }
               className="w-full bg-primary text-primary-foreground rounded-lg py-3 font-medium hover:opacity-90 transition disabled:grayscale"
             >
-              Adopt Now
+              {requestProcessing ? (
+                <Spinner className={"mx-auto block"} />
+              ) : (
+                "Adopt Now"
+              )}
             </button>
           </form>
         </div>
