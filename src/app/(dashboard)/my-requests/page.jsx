@@ -1,8 +1,7 @@
 "use client";
-
 import Loader from "@/components/Loader";
 import RequestCard from "@/components/RequestCard";
-import { token, useSession } from "@/lib/authClient";
+import { token } from "@/lib/authClient";
 import { useQuery } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 
@@ -20,8 +19,6 @@ const MyRequestsPage = () => {
         },
       ).then((res) => res.json());
 
-      console.log("RES:", result);
-
       return result || [];
     },
   });
@@ -32,17 +29,14 @@ const MyRequestsPage = () => {
     try {
       const { data: tokenData } = await token();
 
-      const payload = { id };
-
       const res = await fetch(
-        `${process.env.NEXT_PUBLIC_SERVER_URL}/requests`,
+        `${process.env.NEXT_PUBLIC_SERVER_URL}/requests/${id}`,
         {
           method: "DELETE",
           headers: {
             "content-type": "application/json",
             authorization: `Bearer ${tokenData?.token}`,
           },
-          body: JSON.stringify(payload),
         },
       );
 

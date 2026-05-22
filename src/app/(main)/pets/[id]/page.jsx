@@ -112,7 +112,10 @@ const PetDetailsPage = () => {
           {/* Image */}
           <div className="relative w-full aspect-5/3 overflow-hidden rounded-sm">
             <Image
-              src={petData?.photo}
+              src={
+                petData?.photo ||
+                "https://blocks.astratic.com/img/general-img-landscape.png"
+              }
               alt={petData?.name}
               fill
               className="object-contain"
@@ -182,7 +185,9 @@ const PetDetailsPage = () => {
 
         {/* Right Side Form */}
         <div className="border rounded-2xl p-6 h-fit sticky top-24">
-          <h2 className="text-2xl font-bold mb-1">Adopt {petData?.name} 🐾</h2>
+          <h2 className="text-2xl font-medium mb-1">
+            Adopt <span className="font-bold">{petData?.name}</span> 🐾
+          </h2>
 
           <p className="text-secondary text-sm mb-6">
             Fill out the form to send your adoption request

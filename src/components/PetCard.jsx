@@ -3,6 +3,7 @@ import { MapPinIcon } from "@phosphor-icons/react";
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "./ui/button";
+import { useState } from "react";
 
 const speciesEmoji = {
   Dog: "🐕",
@@ -12,15 +13,24 @@ const speciesEmoji = {
 };
 
 const PetCard = ({ pet }) => {
+  const [imgSrc, setImgSrc] = useState(
+    pet?.photo || "https://blocks.astratic.com/img/general-img-landscape.png",
+  );
+
   return (
-    <div className="group relative bg-white rounded-sm overflow-hidden border border-border hover:shadow-sm transition-all duration-150 flex flex-col">
+    <div className="group w-full max-w-sm mx-auto relative bg-white rounded-sm overflow-hidden border border-border hover:shadow-sm transition-all duration-150 flex flex-col">
       {/* Image */}
       <div className="relative aspect-4/3 overflow-hidden bg-border">
         <Image
-          src={pet?.photo}
+          src={imgSrc}
           width={500}
           height={500}
           alt={pet?.name}
+          onError={() =>
+            setImgSrc(
+              "https://blocks.astratic.com/img/general-img-landscape.png",
+            )
+          }
           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
         />
         <div className="absolute inset-0 bg-linear-to-t from-black/30 to-transparent" />
