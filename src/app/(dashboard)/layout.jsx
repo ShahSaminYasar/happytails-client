@@ -3,7 +3,7 @@ import DashboardSidebar from "@/components/DashboardSidebar";
 const layout = ({ children }) => {
   return (
     <div className="px-3">
-      <div className="w-full grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 lg:gap-8 relative max-w-7xl mx-auto">
+      <div className="w-full grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 gap-5 lg:gap-8 relative max-w-7xl mx-auto">
         <DashboardSidebar />
 
         {/* Content */}

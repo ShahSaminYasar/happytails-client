@@ -5,13 +5,13 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import Swal from "sweetalert2";
 
-const PetListingCard = ({ pet, handleDelete }) => {
+const PetListingCard = ({ pet, handleDelete, handleEdit }) => {
   const [imgSrc, setImgSrc] = useState(
     pet?.photo || "https://blocks.astratic.com/img/general-img-landscape.png",
   );
 
   return (
-    <div className="border rounded-sm overflow-hidden shadow-xs hover:shadow-sm transition bg-card">
+    <div className="border rounded-sm overflow-hidden shadow-xs hover:shadow-sm transition bg-card w-full max-w-sm mx-auto">
       {/* Photo */}
       <div className="relative w-full h-48">
         <Image
@@ -29,26 +29,26 @@ const PetListingCard = ({ pet, handleDelete }) => {
 
       {/* Content */}
       <div className="p-4 space-y-2">
-        {/* Name + Price */}
         <div className="flex justify-between items-center">
           <h2 className="text-lg font-semibold">{pet.name}</h2>
           <span className="text-green-600 font-bold">${pet.adoptionFee}</span>
         </div>
 
-        {/* Info */}
         <p className="text-sm text-gray-500 capitalize">
           {pet.breed} • {pet.species}
         </p>
 
         <p className="text-xs text-gray-400">{pet.location}</p>
 
-        {/* Buttons */}
         <div className="grid grid-cols-2 gap-2 mt-4">
           <button className="bg-blue-500 text-white text-sm py-1 rounded hover:bg-blue-600">
             Requests
           </button>
 
-          <button className="bg-yellow-500 text-white text-sm py-1 rounded hover:bg-yellow-600">
+          <button
+            onClick={() => handleEdit(pet)}
+            className="bg-yellow-500 text-white text-sm py-1 rounded hover:bg-yellow-600"
+          >
             Edit
           </button>
 

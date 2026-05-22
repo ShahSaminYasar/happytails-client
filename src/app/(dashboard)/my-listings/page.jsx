@@ -1,17 +1,20 @@
 "use client";
 import Loader from "@/components/Loader";
 import PetCard from "@/components/PetCard";
+import PetEditDialog from "@/components/PetEditDialog";
 import PetListingCard from "@/components/PetListingCard";
-import RequestCard from "@/components/RequestCard";
 import { token, useSession } from "@/lib/authClient";
 import { useQuery } from "@tanstack/react-query";
 import Link from "next/link";
+import { useState } from "react";
 import toast from "react-hot-toast";
 
 const MyListingsPage = () => {
   const { data: session } = useSession();
 
-  console.log(session?.user.email);
+  // States
+  const [editDialogOpen, setEditDialogOpen] = useState(false);
+  const [editingPetData, setEditingPetData] = useState({});
 
   const { data, isLoading, isError, error, refetch } = useQuery({
     queryKey: ["listings", session],
@@ -56,41 +59,56 @@ const MyListingsPage = () => {
     }
   };
 
-  return (
-    <section className="w-full flex flex-col gap-3">
-      <h3 className="text-3xl sm:text-4xl font-medium text-foreground mb-2">
-        My <span className="font-semibold">Listings</span>
-      </h3>
+  const handleEdit = (data) => {
+    setEditingPetData(data);
+    setEditDialogOpen(true);
+  };
 
-      {isLoading || !session ? (
-        <Loader />
-      ) : isError ? (
-        <p className="block text-destructive font-medium text-sm py-10 px-3 text-center">
-          {error}
-        </p>
-      ) : data?.length === 0 ? (
-        <p className="block text-secondary/50 font-medium text-sm py-10 px-3 text-center">
-          You have not published any pet adoption posts yet.{" "}
-          <Link className="text-primary" href="/add-pet">
-            Add post
-          </Link>
-        </p>
-      ) : (
-        <div
-          className={
-            "w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4"
-          }
-        >
-          {data?.map((pet) => (
-            <PetListingCard
-              key={pet?._id}
-              pet={pet}
-              handleDelete={handleDeletePet}
-            />
-          ))}
-        </div>
-      )}
-    </section>
+  return (
+    <>
+      <section className="w-full flex flex-col gap-3">
+        <h3 className="text-3xl sm:text-4xl font-medium text-foreground mb-2">
+          My <span className="font-semibold">Listings</span>
+        </h3>
+
+        {isLoading || !session ? (
+          <Loader />
+        ) : isError ? (
+          <p className="block text-destructive font-medium text-sm py-10 px-3 text-center">
+            {error}
+          </p>
+        ) : data?.length === 0 ? (
+          <p className="block text-secondary/50 font-medium text-sm py-10 px-3 text-center">
+            You have not published any pet adoption posts yet.{" "}
+            <Link className="text-primary" href="/add-pet">
+              Add post
+            </Link>
+          </p>
+        ) : (
+          <div
+            className={
+              "w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"
+            }
+          >
+            {data?.map((pet) => (
+              <PetListingCard
+                key={pet?._id}
+                pet={pet}
+                handleDelete={handleDeletePet}
+                handleEdit={handleEdit}
+              />
+            ))}
+          </div>
+        )}
+      </section>
+
+      <PetEditDialog
+        open={editDialogOpen}
+        setOpen={setEditDialogOpen}
+        petData={editingPetData}
+        refetch={refetch}
+      />
+    </>
   );
 };
 export default MyListingsPage;
