@@ -30,7 +30,7 @@ const pages = [
 const Footer = () => {
   return (
     <footer className="p-3">
-      <div className="w-full max-w-7xl mx-auto rounded-xl border border-border bg-linear-to-br from-white via-slate-100 to-slate-50 px-5 pt-7 md:pt-14 pb-5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
+      <div className="w-full max-w-7xl mx-auto rounded-xl border border-border bg-linear-to-br from-white/30 via-slate-300/50 to-slate-50/30 px-5 pt-7 md:pt-14 pb-5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
         {/* Col-01 */}
         <Image
           src={"/logo-2.png"}

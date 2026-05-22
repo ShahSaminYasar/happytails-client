@@ -18,7 +18,7 @@ const PetCard = ({ pet }) => {
   );
 
   return (
-    <div className="group w-full max-w-sm mx-auto relative bg-white rounded-sm overflow-hidden border border-border hover:shadow-sm transition-all duration-150 flex flex-col">
+    <div className="group w-full max-w-sm mx-auto relative bg-card rounded-sm overflow-hidden border border-border hover:shadow-sm transition-all duration-150 flex flex-col">
       {/* Image */}
       <div className="relative aspect-4/3 overflow-hidden bg-border">
         <Image
@@ -51,10 +51,10 @@ const PetCard = ({ pet }) => {
       <div className="p-5 flex flex-col flex-1 gap-3">
         {/* Name + breed */}
         <div>
-          <h3 className="text-lg font-bold text-stone-900 leading-tight">
+          <h3 className="text-lg font-bold text-foreground leading-tight">
             {pet?.name}
           </h3>
-          <p className="text-sm text-stone-400 font-medium">{pet?.breed}</p>
+          <p className="text-sm text-secondary/50 font-medium">{pet?.breed}</p>
         </div>
 
         {/* Pills row */}

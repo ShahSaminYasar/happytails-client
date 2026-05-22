@@ -26,7 +26,7 @@ const DashboardSidebar = () => {
   const pathname = usePathname();
 
   return (
-    <aside className="h-fit sm:min-h-[calc(100vh-110px)] w-full sm:sticky sm:top-26 p-5 rounded-lg border bg-linear-to-br from-white via-slate-100 to-slate-50 flex flex-col gap-1 mb-7 sm:mb-0">
+    <aside className="h-fit sm:min-h-[calc(100vh-110px)] w-full sm:sticky sm:top-26 p-5 rounded-lg border bg-linear-to-br from-white/30 via-slate-100/30 to-slate-50/30 flex flex-col gap-1 mb-7 sm:mb-0">
       {pages?.map((page, index) => (
         <Button
           key={`${page?.path}_${index}`}

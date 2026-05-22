@@ -9,6 +9,7 @@ import { signOut, useSession } from "@/lib/authClient";
 import { Spinner } from "./ui/spinner";
 import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
 import { Avatar, AvatarImage } from "./ui/avatar";
+import ThemeToggle from "./ThemeToggle";
 
 const navLinks = [
   {
@@ -95,6 +96,8 @@ const Header = () => {
 
           {/* Buttons */}
           <div className="flex items-center gap-3">
+            <ThemeToggle />
+
             {isPending ? (
               <Spinner />
             ) : session?.user ? (
