@@ -53,7 +53,7 @@ const AddPetForm = () => {
 
       if (res.ok && data.ok) {
         toast.success(data.message || "Published successfully");
-        router.push(`/pets/${data?.id}`);
+        router.push(`/my-listings`);
       } else {
         toast.error(data.message || "Failed to publish post.");
       }
@@ -98,7 +98,7 @@ const AddPetForm = () => {
 
       <Field>
         <FieldLabel>Age</FieldLabel>
-        <Input name="age" min="0" placeholder="0" type="number" required />
+        <Input name="age" placeholder="0y 0m" type="text" required />
       </Field>
 
       <Field>

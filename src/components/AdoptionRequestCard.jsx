@@ -2,11 +2,17 @@
 
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import Swal from "sweetalert2";
 
-const RequestCard = ({ request, handleApprove, handleReject }) => {
+const AdoptionRequestCard = ({
+  request,
+  handleChangeStatus,
+  setOpen,
+  adopted,
+}) => {
   const { _id, name, email, pickupDate, status, pet } = request;
 
-  const isFinal = status === "approved" || status === "rejected";
+  const isFinal = adopted || status === "approved" || status === "rejected";
 
   return (
     <div className="border rounded-xl p-4 bg-background flex flex-col gap-3">
@@ -64,7 +70,22 @@ const RequestCard = ({ request, handleApprove, handleReject }) => {
             <Button
               size="sm"
               className="text-xs h-8 px-3 bg-green-600 hover:bg-green-700 text-white"
-              onClick={() => handleApprove(_id)}
+              onClick={() => {
+                setOpen(false);
+                Swal.fire({
+                  title: "Are you sure?",
+                  text: `This adoption request will be accepted and the pet will be marked as 'Adopted'.`,
+                  icon: "warning",
+                  showCancelButton: true,
+                  confirmButtonColor: "#3085d6",
+                  cancelButtonColor: "#d33",
+                  confirmButtonText: "Yes, accept request!",
+                }).then((result) => {
+                  if (result.isConfirmed) {
+                    handleChangeStatus(_id, "approved", pet?._id);
+                  }
+                });
+              }}
             >
               Approve
             </Button>
@@ -73,7 +94,22 @@ const RequestCard = ({ request, handleApprove, handleReject }) => {
               size="sm"
               variant="destructive"
               className="text-xs h-8 px-3"
-              onClick={() => handleReject(_id)}
+              onClick={() => {
+                setOpen(false);
+                Swal.fire({
+                  title: "Are you sure?",
+                  text: `This adoption request will be rejected.`,
+                  icon: "warning",
+                  showCancelButton: true,
+                  confirmButtonColor: "#3085d6",
+                  cancelButtonColor: "#d33",
+                  confirmButtonText: "Yes, reject request!",
+                }).then((result) => {
+                  if (result.isConfirmed) {
+                    handleChangeStatus(_id, "rejected", pet?._id);
+                  }
+                });
+              }}
             >
               Reject
             </Button>
@@ -84,4 +120,4 @@ const RequestCard = ({ request, handleApprove, handleReject }) => {
   );
 };
 
-export default RequestCard;
+export default AdoptionRequestCard;

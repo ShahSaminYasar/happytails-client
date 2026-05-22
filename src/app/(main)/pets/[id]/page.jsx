@@ -286,11 +286,15 @@ const PetDetailsPage = () => {
             <button
               type="submit"
               disabled={
-                petData?.ownerEmail === user?.email || requestProcessing
+                petData?.ownerEmail === user?.email ||
+                requestProcessing ||
+                petData?.adopted
               }
               className="w-full bg-primary text-primary-foreground rounded-lg py-3 font-medium hover:opacity-90 transition disabled:grayscale"
             >
-              {requestProcessing ? (
+              {petData?.adopted ? (
+                "Already adopted"
+              ) : requestProcessing ? (
                 <Spinner className={"mx-auto block"} />
               ) : (
                 "Adopt Now"

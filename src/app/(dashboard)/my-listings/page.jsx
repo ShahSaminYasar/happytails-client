@@ -19,6 +19,7 @@ const MyListingsPage = () => {
   const [requestsDialogOpen, setRequestsDialogOpen] = useState(false);
   const [requestsOfPetId, setRequestsOfPetId] = useState("");
   const [requestsOfPetName, setRequestsOfPetName] = useState("");
+  const [requestedPetAdopted, setRequestedPetAdopted] = useState(false);
 
   const { data, isLoading, isError, error, refetch } = useQuery({
     queryKey: ["listings", session],
@@ -68,9 +69,10 @@ const MyListingsPage = () => {
     setEditDialogOpen(true);
   };
 
-  const handleViewAdoptionRequests = (petId, petName) => {
+  const handleViewAdoptionRequests = (petId, petName, adopted) => {
     setRequestsOfPetId(petId);
     setRequestsOfPetName(petName);
+    setRequestedPetAdopted(adopted);
     setRequestsDialogOpen(true);
   };
 
@@ -95,20 +97,51 @@ const MyListingsPage = () => {
             </Link>
           </p>
         ) : (
-          <div
-            className={
-              "w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"
-            }
-          >
-            {data?.map((pet) => (
-              <PetListingCard
-                key={pet?._id}
-                pet={pet}
-                handleDelete={handleDeletePet}
-                handleEdit={handleEdit}
-                handleViewRequests={handleViewAdoptionRequests}
-              />
-            ))}
+          <div className="w-full flex flex-col gap-3">
+            <div className="grid grid-cols-3 gap-2 sm:gap-3">
+              <div className="flex flex-col gap-1 items-start p-3 rounded-sm border-2 border-primary/50">
+                <span className="text-xl font-normal text-secondary">
+                  {data?.length}
+                </span>
+                <span className="text-sm font-semibold text-primary">
+                  Total listings
+                </span>
+              </div>
+
+              <div className="flex flex-col gap-1 items-start p-3 rounded-sm border-2 border-primary/50">
+                <span className="text-xl font-normal text-secondary">
+                  {data?.filter((item) => item?.adopted === false)?.length}
+                </span>
+                <span className="text-sm font-semibold text-primary">
+                  Available
+                </span>
+              </div>
+
+              <div className="flex flex-col gap-1 items-start p-3 rounded-sm border-2 border-primary/50">
+                <span className="text-xl font-normal text-secondary">
+                  {data?.filter((item) => item?.adopted === true)?.length}
+                </span>
+                <span className="text-sm font-semibold text-primary">
+                  Adopted
+                </span>
+              </div>
+            </div>
+
+            <div
+              className={
+                "w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"
+              }
+            >
+              {data?.map((pet) => (
+                <PetListingCard
+                  key={pet?._id}
+                  pet={pet}
+                  handleDelete={handleDeletePet}
+                  handleEdit={handleEdit}
+                  handleViewRequests={handleViewAdoptionRequests}
+                />
+              ))}
+            </div>
           </div>
         )}
       </section>
@@ -125,6 +158,8 @@ const MyListingsPage = () => {
         setOpen={setRequestsDialogOpen}
         petId={requestsOfPetId}
         petName={requestsOfPetName}
+        adopted={requestedPetAdopted}
+        mainRefetch={refetch}
       />
     </>
   );

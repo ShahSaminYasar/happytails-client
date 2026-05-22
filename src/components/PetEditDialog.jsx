@@ -111,9 +111,8 @@ const PetEditDialog = ({ petData, open, setOpen, refetch }) => {
             <FieldLabel>Age</FieldLabel>
             <Input
               name="age"
-              min="0"
-              placeholder="0"
-              type="number"
+              placeholder="0y 0m"
+              type="text"
               required
               defaultValue={petData?.age}
             />

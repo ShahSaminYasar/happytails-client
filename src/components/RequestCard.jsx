@@ -39,12 +39,12 @@ const RequestCard = ({ request, handleDelete }) => {
               onClick={() => {
                 Swal.fire({
                   title: "Are you sure?",
-                  text: `Confirm to delete the adoption request?`,
+                  text: `Confirm to cancel the adoption request?`,
                   icon: "warning",
                   showCancelButton: true,
                   confirmButtonColor: "#3085d6",
                   cancelButtonColor: "#d33",
-                  confirmButtonText: "Yes, delete it!",
+                  confirmButtonText: "Yes, cancel it!",
                 }).then((result) => {
                   if (result.isConfirmed) {
                     handleDelete(_id);
@@ -52,7 +52,7 @@ const RequestCard = ({ request, handleDelete }) => {
                 });
               }}
             >
-              Delete
+              Cancel
             </Button>
           </div>
         </div>

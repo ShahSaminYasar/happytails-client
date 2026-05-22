@@ -47,7 +47,9 @@ const PetListingCard = ({
 
         <div className="grid grid-cols-2 gap-2 mt-4">
           <button
-            onClick={() => handleViewRequests(pet?._id, pet?.name)}
+            onClick={() =>
+              handleViewRequests(pet?._id, pet?.name, pet?.adopted)
+            }
             className="bg-blue-500 text-white text-sm py-1 rounded hover:bg-blue-600"
           >
             Requests
