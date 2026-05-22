@@ -1,9 +1,11 @@
 "use client";
+
 import { MapPinIcon } from "@phosphor-icons/react";
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "./ui/button";
 import { useState } from "react";
+import { motion } from "motion/react";
 
 const speciesEmoji = {
   Dog: "🐕",
@@ -18,9 +20,31 @@ const PetCard = ({ pet }) => {
   );
 
   return (
-    <div className="group w-full max-w-sm mx-auto relative bg-card rounded-sm overflow-hidden border border-border hover:shadow-sm transition-all duration-150 flex flex-col">
-      {/* Image */}
-      <div className="relative aspect-4/3 overflow-hidden bg-border">
+    <motion.div
+      initial={{
+        opacity: 0,
+        y: 50,
+        scale: 0.95,
+      }}
+      whileInView={{
+        opacity: 1,
+        y: 0,
+        scale: 1,
+      }}
+      viewport={{ once: true, amount: 0.2 }}
+      transition={{
+        duration: 0.6,
+        ease: "easeOut",
+      }}
+      className="group w-full max-w-sm mx-auto relative bg-card rounded-sm overflow-hidden border border-border hover:shadow-sm transition-all duration-200 flex flex-col"
+    >
+      <motion.div
+        initial={{ clipPath: "inset(0 0 100% 0)" }}
+        whileInView={{ clipPath: "inset(0 0 0% 0)" }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+        className="relative aspect-4/3 overflow-hidden bg-border"
+      >
         <Image
           src={imgSrc}
           width={500}
@@ -33,59 +57,98 @@ const PetCard = ({ pet }) => {
           }
           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
         />
+
         <div className="absolute inset-0 bg-linear-to-t from-black/30 to-transparent" />
 
-        {/* Species badge */}
-        <span className="absolute top-3 left-3 bg-white/90 backdrop-blur-sm text-stone-700 text-xs font-semibold px-3 py-1 rounded-full flex items-center gap-1.5 capitalize">
+        <motion.span
+          initial={{ opacity: 0, x: -20 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.25, duration: 0.4 }}
+          className="absolute top-3 left-3 bg-white/90 backdrop-blur-sm text-stone-700 text-xs font-semibold px-3 py-1 rounded-full flex items-center gap-1.5 capitalize"
+        >
           <span>{speciesEmoji[pet?.species] ?? "🐾"}</span>
           {pet?.species}
-        </span>
+        </motion.span>
 
-        {/* Fee badge */}
-        <span className="absolute top-3 right-3 bg-emerald-500 text-white text-xs font-bold px-3 py-1 rounded-full">
+        <motion.span
+          initial={{ opacity: 0, x: 20 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.3, duration: 0.4 }}
+          className="absolute top-3 right-3 bg-emerald-500 text-white text-xs font-bold px-3 py-1 rounded-full"
+        >
           ${pet?.adoptionFee}
-        </span>
-      </div>
+        </motion.span>
+      </motion.div>
 
-      {/* Body */}
       <div className="p-5 flex flex-col flex-1 gap-3">
-        {/* Name + breed */}
-        <div>
+        <motion.div
+          initial={{ opacity: 0, y: 15 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.35, duration: 0.45 }}
+        >
           <h3 className="text-lg font-bold text-foreground leading-tight">
             {pet?.name}
           </h3>
-          <p className="text-sm text-secondary/50 font-medium">{pet?.breed}</p>
-        </div>
 
-        {/* Pills row */}
-        <div className="flex flex-wrap gap-2">
+          <p className="text-sm text-secondary/50 font-medium">{pet?.breed}</p>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 15 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.4, duration: 0.45 }}
+          className="flex flex-wrap gap-2"
+        >
           <Pill>{pet?.gender}</Pill>
+
           <Pill>
             {pet?.age} {pet?.age === 1 ? "yr" : "yrs"}
           </Pill>
+
           <Pill color="green">{pet?.vaccinationStatus}</Pill>
+
           <Pill color={pet?.healthStatus === "Healthy" ? "blue" : "amber"}>
             {pet?.healthStatus}
           </Pill>
-        </div>
+        </motion.div>
 
-        {/* Description */}
-        <p className="text-sm text-stone-500 leading-relaxed line-clamp-2 flex-1">
+        <motion.p
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.45, duration: 0.5 }}
+          className="text-sm text-stone-500 leading-relaxed line-clamp-2 flex-1"
+        >
           {pet?.description}
-        </p>
+        </motion.p>
 
-        {/* Location */}
-        <div className="flex items-center gap-1.5 text-xs text-stone-400">
+        <motion.div
+          initial={{ opacity: 0, y: 12 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.5, duration: 0.45 }}
+          className="flex items-center gap-1.5 text-xs text-stone-400"
+        >
           <MapPinIcon />
           {pet?.location}
-        </div>
+        </motion.div>
 
-        {/* Details Button */}
-        <Button asChild>
-          <Link href={`/pets/${pet?._id}`}>View Details</Link>
-        </Button>
+        <motion.div
+          initial={{ opacity: 0, y: 14 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.55, duration: 0.45 }}
+        >
+          <Button asChild>
+            <Link href={`/pets/${pet?._id}`}>View Details</Link>
+          </Button>
+        </motion.div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 
@@ -96,12 +159,17 @@ const Pill = ({ children, color = "stone" }) => {
     blue: "bg-sky-50 text-sky-700",
     amber: "bg-amber-50 text-amber-700",
   };
+
   return (
-    <span
+    <motion.span
+      initial={{ opacity: 0, scale: 0.8 }}
+      whileInView={{ opacity: 1, scale: 1 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.3 }}
       className={`text-xs font-medium px-2.5 py-0.5 rounded-full capitalize ${styles[color]}`}
     >
       {children}
-    </span>
+    </motion.span>
   );
 };
 

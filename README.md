@@ -1,36 +1,42 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 🐾 Happy Tails - Pet Adoption Platform
 
-## Getting Started
+Happy Tails is a full-stack pet adoption platform where people can find their next furry (or feathery) companion. Whether you're looking to adopt a dog, cat, bird, or rabbit - you'll find them here. Shelters and pet owners can list pets, manage adoption requests, and connect with loving families.
 
-First, run the development server:
+## 🌐 Live Site
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+[https://ssy-happytails.vercel.app](https://ssy-happytails.vercel.app)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## ✨ Features
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+- 🔍 **Browse & Search Pets** - Explore all available pets with real-time search by name and filter by species
+- 📋 **Adoption Requests** - Submit adoption requests with a pickup date and message directly from a pet's profile
+- 🏠 **Owner Dashboard** - Add, edit, and delete your pet listings; approve or reject incoming adoption requests
+- 🔐 **Secure Authentication** - Email/password and Google sign-in powered by Better Auth with JWT stored in HttpOnly cookies
+- 📬 **Request Tracking** - Requesters can track their adoption status (Pending / Approved / Rejected) and cancel anytime
+- 🌙 **Dark / Light Theme** - Toggle between dark and light mode with preference saved across sessions
+- 🎞️ **Smooth Animations** - Page transitions and UI interactions powered by Framer Motion
+- 📱 **Fully Responsive** - Works great on mobile, tablet, and desktop
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🛠️ NPM Packages Used
 
-## Learn More
+### Client
+- `next` - React framework with App Router
+- `tailwindcss` - Utility-first CSS
+- `shadcn/ui` - Accessible, composable UI components
+- `@tanstack/react-query` - Server state management and data fetching
+- `framer-motion` - Animations and page transitions
+- `@phosphor-icons/react` - Icon library
+- `axios` - HTTP client
+- `better-auth` - Authentication
+- `sonner` - Toast notifications
 
-To learn more about Next.js, take a look at the following resources:
+### Server
+- `express` - Web framework
+- `mongodb` - MongoDB native driver
+- `cors` - Cross-origin resource sharing
+- `dotenv` - Environment variable management
+- `jose-cjs` - JWT verification
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Made with ❤️ for pets and the people who love them.
